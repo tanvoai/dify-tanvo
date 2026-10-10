@@ -1,0 +1,38 @@
+identity:
+  author: tanvo
+  name: tanvo
+  label:
+    en_US: Tanvo
+    zh_Hans: Tanvo
+  description:
+    en_US: AI images, videos and songs on Nano Banana, Seedream, GPT Image, Kling, Veo, Seedance and Suno, plus ready-made photo and video apps.
+    zh_Hans: 在 Nano Banana、Seedream、GPT Image、Kling、Veo、Seedance 和 Suno 上生成图片、视频和歌曲，并提供现成的照片和视频应用。
+  icon: icon.svg
+  icon_dark: icon-dark.svg
+  tags:
+    - image
+    - videos
+    - entertainment
+credentials_for_provider:
+  tanvo_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Tanvo API key
+      zh_Hans: Tanvo API key
+    placeholder:
+      en_US: sk_...
+    help:
+      en_US: Create a key in Tanvo under Settings, API keys. New accounts start with free credits.
+      zh_Hans: 在 Tanvo 的设置页面创建 API key，新账号自带免费积分。
+    url: https://tanvo.ai/settings/apikeys?utm_source=dify&utm_medium=referral
+tools:
+  - tools/generate_image.yaml
+  - tools/generate_video.yaml
+  - tools/generate_song.yaml
+  - tools/run_app.yaml
+  - tools/list_apps.yaml
+  - tools/get_generation.yaml
+extra:
+  python:
+    source: provider/tanvo.py

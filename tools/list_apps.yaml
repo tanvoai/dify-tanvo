@@ -1,0 +1,44 @@
+identity:
+  name: list_apps
+  author: tanvo
+  label:
+    en_US: List Apps
+    zh_Hans: 应用列表
+description:
+  human:
+    en_US: Tanvo's ready-made apps with their looks and the photos each needs.
+    zh_Hans: Tanvo 的现成应用、风格和需要的照片。
+  llm: 'Lists Tanvo apps: id, kind (image, video or music), what it does, the photos it needs and its preset looks. Use before Run App.'
+parameters:
+- name: kind
+  type: select
+  required: false
+  form: llm
+  label:
+    en_US: Kind
+    zh_Hans: 类型
+  human_description:
+    en_US: Which apps to list.
+    zh_Hans: 列出哪类应用。
+  llm_description: 'Optional: image, video, music or all.'
+  options:
+  - value: all
+    label:
+      en_US: all
+      zh_Hans: all
+  - value: image
+    label:
+      en_US: image
+      zh_Hans: image
+  - value: video
+    label:
+      en_US: video
+      zh_Hans: video
+  - value: music
+    label:
+      en_US: music
+      zh_Hans: music
+  default: all
+extra:
+  python:
+    source: tools/list_apps.py

@@ -1,0 +1,218 @@
+identity:
+  name: generate_image
+  author: tanvo
+  label:
+    en_US: Generate Image
+    zh_Hans: 生成图片
+description:
+  human:
+    en_US: Text to image, or edit and combine images, on Nano Banana, Seedream, GPT Image, Qwen and Grok Imagine.
+    zh_Hans: 文生图，或编辑、合成图片。
+  llm: Generates or edits an image with Tanvo. Give a detailed prompt; pass reference images to edit or combine them. Returns the image files, their URLs and a generation_id.
+parameters:
+- name: prompt
+  type: string
+  required: true
+  form: llm
+  label:
+    en_US: Prompt
+    zh_Hans: 提示词
+  human_description:
+    en_US: What to make, or what to change in the images.
+    zh_Hans: 要生成什么，或要怎么改图。
+  llm_description: A detailed description of the image, or of the edit to make to the reference images.
+- name: images
+  type: files
+  required: false
+  form: llm
+  label:
+    en_US: Reference images
+    zh_Hans: 参考图
+  human_description:
+    en_US: Optional images to edit or combine.
+    zh_Hans: 可选：要编辑或合成的图片。
+  llm_description: Optional images to edit or combine, in order.
+- name: model
+  type: select
+  required: false
+  form: form
+  label:
+    en_US: Model
+    zh_Hans: 模型
+  human_description:
+    en_US: Which model to run. Prices are in credits at the model's default settings.
+    zh_Hans: 用哪个模型。价格是默认设置下的积分。
+  options:
+  - value: studio-image-v1
+    label:
+      en_US: Tanvo Image v1 (about 5 credits)
+      zh_Hans: Tanvo Image v1 (about 5 credits)
+  - value: nano-banana-2
+    label:
+      en_US: Nano Banana 2 (about 25 credits)
+      zh_Hans: Nano Banana 2 (about 25 credits)
+  - value: nano-banana-2-lite
+    label:
+      en_US: Nano Banana 2 Lite (about 15 credits)
+      zh_Hans: Nano Banana 2 Lite (about 15 credits)
+  - value: nano-banana-pro
+    label:
+      en_US: Nano Banana Pro (about 50 credits)
+      zh_Hans: Nano Banana Pro (about 50 credits)
+  - value: nano-banana
+    label:
+      en_US: Nano Banana (about 15 credits)
+      zh_Hans: Nano Banana (about 15 credits)
+  - value: gpt-image-2
+    label:
+      en_US: GPT Image 2 (about 25 credits)
+      zh_Hans: GPT Image 2 (about 25 credits)
+  - value: gpt-image-2-5
+    label:
+      en_US: GPT Image 2.5 (about 10 credits)
+      zh_Hans: GPT Image 2.5 (about 10 credits)
+  - value: seedream-5-lite
+    label:
+      en_US: Seedream 5.0 Lite (about 15 credits)
+      zh_Hans: Seedream 5.0 Lite (about 15 credits)
+  - value: seedream-4
+    label:
+      en_US: Seedream 4.0 (about 10 credits)
+      zh_Hans: Seedream 4.0 (about 10 credits)
+  - value: seedream-4-5
+    label:
+      en_US: Seedream 4.5 (about 15 credits)
+      zh_Hans: Seedream 4.5 (about 15 credits)
+  - value: seedream-5-pro
+    label:
+      en_US: Seedream 5.0 Pro (about 15 credits)
+      zh_Hans: Seedream 5.0 Pro (about 15 credits)
+  - value: qwen-image-3
+    label:
+      en_US: Qwen Image 3 (about 10 credits)
+      zh_Hans: Qwen Image 3 (about 10 credits)
+  - value: qwen-image-2-1
+    label:
+      en_US: Qwen Image 2.1 (about 10 credits)
+      zh_Hans: Qwen Image 2.1 (about 10 credits)
+  - value: grok-imagine-2
+    label:
+      en_US: Grok Imagine Image 2.0 (about 20 credits)
+      zh_Hans: Grok Imagine Image 2.0 (about 20 credits)
+  default: nano-banana-2
+- name: aspect
+  type: select
+  required: false
+  form: form
+  label:
+    en_US: Aspect ratio
+    zh_Hans: 画面比例
+  human_description:
+    en_US: Not every model takes every ratio; the error lists the ones it does.
+    zh_Hans: 不是每个模型都支持所有比例，报错会列出支持的。
+  options:
+  - value: auto
+    label:
+      en_US: Model default
+      zh_Hans: Model default
+  - value: '1:1'
+    label:
+      en_US: '1:1'
+      zh_Hans: '1:1'
+  - value: '16:9'
+    label:
+      en_US: '16:9'
+      zh_Hans: '16:9'
+  - value: '9:16'
+    label:
+      en_US: '9:16'
+      zh_Hans: '9:16'
+  - value: '4:3'
+    label:
+      en_US: '4:3'
+      zh_Hans: '4:3'
+  - value: '3:4'
+    label:
+      en_US: '3:4'
+      zh_Hans: '3:4'
+  - value: '3:2'
+    label:
+      en_US: '3:2'
+      zh_Hans: '3:2'
+  - value: '2:3'
+    label:
+      en_US: '2:3'
+      zh_Hans: '2:3'
+  default: auto
+- name: resolution
+  type: select
+  required: false
+  form: form
+  label:
+    en_US: Resolution
+    zh_Hans: 分辨率
+  human_description:
+    en_US: Output resolution.
+    zh_Hans: 输出分辨率。
+  options:
+  - value: auto
+    label:
+      en_US: Model default
+      zh_Hans: Model default
+  - value: 1K
+    label:
+      en_US: 1K
+      zh_Hans: 1K
+  - value: 2K
+    label:
+      en_US: 2K
+      zh_Hans: 2K
+  - value: 4K
+    label:
+      en_US: 4K
+      zh_Hans: 4K
+  default: auto
+- name: format
+  type: select
+  required: false
+  form: form
+  label:
+    en_US: Format
+    zh_Hans: 格式
+  human_description:
+    en_US: File format.
+    zh_Hans: 文件格式。
+  options:
+  - value: auto
+    label:
+      en_US: Model default
+      zh_Hans: Model default
+  - value: PNG
+    label:
+      en_US: PNG
+      zh_Hans: PNG
+  - value: JPG
+    label:
+      en_US: JPG
+      zh_Hans: JPG
+  - value: WEBP
+    label:
+      en_US: WEBP
+      zh_Hans: WEBP
+  default: auto
+- name: wait_seconds
+  type: number
+  required: false
+  form: form
+  label:
+    en_US: Wait (seconds)
+    zh_Hans: 等待（秒）
+  human_description:
+    en_US: How long to wait for the result, up to 240. If the run is still going, the tool returns its generation_id for Get Generation.
+    zh_Hans: 最多等多久，最长 240 秒。还没完成就返回 generation_id，之后用 Get Generation 取结果。
+  default: 240
+  min: 0
+  max: 240
+extra:
+  python:
+    source: tools/generate_image.py

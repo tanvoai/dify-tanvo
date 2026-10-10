@@ -1,0 +1,39 @@
+identity:
+  name: get_generation
+  author: tanvo
+  label:
+    en_US: Get Generation
+    zh_Hans: 获取生成结果
+description:
+  human:
+    en_US: The status and files of a run started earlier, waiting for it to finish if needed.
+    zh_Hans: 查询之前的运行状态和文件，必要时等待完成。
+  llm: Fetches a Tanvo run by generation_id, waiting up to wait_seconds for it to finish. Use it when a generate tool returned a status other than SUCCEEDED.
+parameters:
+- name: generation_id
+  type: string
+  required: true
+  form: llm
+  label:
+    en_US: Generation ID
+    zh_Hans: 生成 ID
+  human_description:
+    en_US: The generation_id a generate tool returned.
+    zh_Hans: 生成工具返回的 generation_id。
+  llm_description: The generation_id returned earlier.
+- name: wait_seconds
+  type: number
+  required: false
+  form: form
+  label:
+    en_US: Wait (seconds)
+    zh_Hans: 等待（秒）
+  human_description:
+    en_US: How long to wait for the result, up to 240. If the run is still going, the tool returns its generation_id for Get Generation.
+    zh_Hans: 最多等多久，最长 240 秒。还没完成就返回 generation_id，之后用 Get Generation 取结果。
+  default: 240
+  min: 0
+  max: 240
+extra:
+  python:
+    source: tools/get_generation.py

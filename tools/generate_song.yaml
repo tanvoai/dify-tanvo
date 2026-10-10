@@ -1,0 +1,85 @@
+identity:
+  name: generate_song
+  author: tanvo
+  label:
+    en_US: Generate Song
+    zh_Hans: 生成歌曲
+description:
+  human:
+    en_US: 'A song in two takes on Suno V6: describe it, sing your own lyrics, or go instrumental.'
+    zh_Hans: 用 Suno V6 写歌，两个版本：描述、自己的歌词或纯音乐。
+  llm: Generates a song with Tanvo (two takes). In Describe mode the prompt describes the song (who it is for, mood, details); in Lyrics mode the prompt is the lyrics to sing. Returns the audio files, titles,
+    lyrics and a generation_id.
+parameters:
+- name: prompt
+  type: string
+  required: true
+  form: llm
+  label:
+    en_US: Prompt
+    zh_Hans: 提示词
+  human_description:
+    en_US: The song, or its lyrics in Lyrics mode.
+    zh_Hans: 歌曲描述，Lyrics 模式下是歌词。
+  llm_description: What the song is about and for whom, or the full lyrics in Lyrics mode.
+- name: mode
+  type: select
+  required: false
+  form: form
+  label:
+    en_US: Mode
+    zh_Hans: 模式
+  human_description:
+    en_US: 'Describe: the prompt describes the song. Lyrics: the prompt is the lyrics. Instrumental: no vocals.'
+    zh_Hans: Describe：描述歌曲。Lyrics：提示词就是歌词。Instrumental：纯音乐。
+  options:
+  - value: Describe
+    label:
+      en_US: Describe
+      zh_Hans: Describe
+  - value: Lyrics
+    label:
+      en_US: Lyrics
+      zh_Hans: Lyrics
+  - value: Instrumental
+    label:
+      en_US: Instrumental
+      zh_Hans: Instrumental
+  default: Describe
+- name: style
+  type: string
+  required: false
+  form: llm
+  label:
+    en_US: Style
+    zh_Hans: 风格
+  human_description:
+    en_US: Genre, instruments and voice, e.g. acoustic pop, hand claps, warm female vocal.
+    zh_Hans: 曲风、乐器和人声。
+  llm_description: Optional genre, instruments and voice.
+- name: title
+  type: string
+  required: false
+  form: llm
+  label:
+    en_US: Title
+    zh_Hans: 标题
+  human_description:
+    en_US: Optional song title.
+    zh_Hans: 可选：歌名。
+- name: wait_seconds
+  type: number
+  required: false
+  form: form
+  label:
+    en_US: Wait (seconds)
+    zh_Hans: 等待（秒）
+  human_description:
+    en_US: How long to wait for the result, up to 240. If the run is still going, the tool returns its generation_id for Get Generation.
+    zh_Hans: 最多等多久，最长 240 秒。还没完成就返回 generation_id，之后用 Get Generation 取结果。
+  default: 240
+  min: 0
+  max: 240
+extra:
+  python:
+    source: tools/generate_song.py

@@ -1,0 +1,43 @@
+version: 0.0.1
+type: plugin
+author: tanvo
+name: tanvo
+label:
+  en_US: Tanvo
+  zh_Hans: Tanvo
+description:
+  en_US: Generate images, videos and songs with Nano Banana, Seedream, GPT Image, Kling, Veo, Seedance and Suno, or run Tanvo's ready-made photo and video apps.
+  zh_Hans: 用 Nano Banana、Seedream、GPT Image、Kling、Veo、Seedance 和 Suno 生成图片、视频和歌曲，或运行 Tanvo 的现成照片和视频应用。
+icon: icon.svg
+icon_dark: icon-dark.svg
+tags:
+  - image
+  - videos
+  - entertainment
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+plugins:
+  tools:
+    - provider/tanvo.yaml
+meta:
+  version: 0.0.2
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: 1.17.1
+created_at: "2026-10-10T00:00:00Z"
+privacy: PRIVACY.md
+repo: https://github.com/tanvoai/dify-tanvo
+contact: support@tanvo.ai
+network:
+  domains:
+    - tanvo.ai
+    - media.tanvo.ai
+    - r2.cloudflarestorage.com

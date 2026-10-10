@@ -1,0 +1,72 @@
+identity:
+  name: run_app
+  author: tanvo
+  label:
+    en_US: Run App
+    zh_Hans: 运行应用
+description:
+  human:
+    en_US: Run one of Tanvo's ready-made apps (pet portraits, figurines, old photo restoration, tattoo designs, trend videos, birthday songs) with its tuned preset looks.
+    zh_Hans: 运行 Tanvo 的现成应用（宠物肖像、手办、老照片修复、纹身设计、热门视频、生日歌），用调好的预设风格。
+  llm: Runs a Tanvo app on the given photos with one of its preset looks. Use List Apps first to find the app id, its looks and how many photos it needs. Put names and personal details in details.
+parameters:
+- name: app
+  type: string
+  required: true
+  form: llm
+  label:
+    en_US: App
+    zh_Hans: 应用
+  human_description:
+    en_US: The app id, e.g. ai-pet-portrait-generator. List Apps shows them all.
+    zh_Hans: 应用 id，例如 ai-pet-portrait-generator。List Apps 会列出全部。
+  llm_description: The app id from List Apps, e.g. ai-pet-portrait-generator.
+- name: look
+  type: string
+  required: false
+  form: llm
+  label:
+    en_US: Look
+    zh_Hans: 风格
+  human_description:
+    en_US: The look id, e.g. royal. Empty uses the app's first look.
+    zh_Hans: 风格 id，例如 royal。留空用第一个。
+  llm_description: Optional look id from List Apps; empty means the app's first look.
+- name: photos
+  type: files
+  required: false
+  form: llm
+  label:
+    en_US: Photos
+    zh_Hans: 照片
+  human_description:
+    en_US: The photos (or clips) the app asks for, in order.
+    zh_Hans: 应用需要的照片（或视频片段），按顺序。
+  llm_description: The photos or video clips the app needs, in the order List Apps gives.
+- name: details
+  type: string
+  required: false
+  form: llm
+  label:
+    en_US: Details
+    zh_Hans: 补充信息
+  human_description:
+    en_US: 'Optional: who or what it is for, e.g. a name or an inside joke.'
+    zh_Hans: 可选：给谁做的，比如名字、梗。
+  llm_description: Optional personal details to include, such as a name.
+- name: wait_seconds
+  type: number
+  required: false
+  form: form
+  label:
+    en_US: Wait (seconds)
+    zh_Hans: 等待（秒）
+  human_description:
+    en_US: How long to wait for the result, up to 240. If the run is still going, the tool returns its generation_id for Get Generation.
+    zh_Hans: 最多等多久，最长 240 秒。还没完成就返回 generation_id，之后用 Get Generation 取结果。
+  default: 240
+  min: 0
+  max: 240
+extra:
+  python:
+    source: tools/run_app.py

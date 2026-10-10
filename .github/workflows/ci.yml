@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pyyaml
+      - run: python -m unittest discover -s tests -v
+      - name: Plugin starts in serverless mode, as in the Marketplace check
+        run: |
+          INSTALL_METHOD=serverless SERVERLESS_HOST=127.0.0.1 SERVERLESS_PORT=8080 timeout 25 python -m main > serve.log 2>&1 || true
+          cat serve.log
+          grep -q "Serving Flask app" serve.log
